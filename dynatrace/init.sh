@@ -56,6 +56,8 @@ export DYNATRACE_KUBERNETES_DATA_INGEST_TOKEN
 kubectl create namespace dynatrace
 kubectl apply -f https://github.com/Dynatrace/dynatrace-operator/releases/download/v1.5.1/kubernetes-csi.yaml
 
+sleep 60
+
 kubectl --namespace dynatrace \
   create secret generic predictive-kubernetes-scaling-demo \
   --from-literal=apiToken="$DYNATRACE_KUBERNETES_OPERATOR_TOKEN" \
