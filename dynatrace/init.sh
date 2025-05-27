@@ -47,11 +47,14 @@ DYNATRACE_KUBERNETES_DATA_INGEST_TOKEN="$(terraform output kubernetes_data_inges
 export DYNATRACE_KUBERNETES_DATA_INGEST_TOKEN
 
 # Install & configure Dynatrace operator
-helm install dynatrace-operator oci://public.ecr.aws/dynatrace/dynatrace-operator \
-  --version 1.3.1 \
-  --create-namespace --namespace dynatrace \
-  --values ./kubernetes/operator.values.yaml \
-  --atomic --wait
+#helm install dynatrace-operator oci://public.ecr.aws/dynatrace/dynatrace-operator \
+#  --version 1.3.1 \
+#  --create-namespace --namespace dynatrace \
+#  --values ./kubernetes/operator.values.yaml \
+#  --atomic --wait
+
+kubectl create namespace dynatrace
+kubectl apply -f https://github.com/Dynatrace/dynatrace-operator/releases/download/v1.5.1/kubernetes-csi.yaml
 
 kubectl --namespace dynatrace \
   create secret generic predictive-kubernetes-scaling-demo \
